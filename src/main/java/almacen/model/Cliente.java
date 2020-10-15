@@ -4,11 +4,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import lombok.Data;
+
 @Entity
+@Data
 public class Cliente {
 	
 	@Id
-	private Integer id;
+	private Long id;
 	
 	@Column
 	private String nombre;

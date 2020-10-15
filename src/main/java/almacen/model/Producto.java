@@ -4,11 +4,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import lombok.Data;
+
 @Entity
+@Data
 public class Producto {
 
 	@Id
-	private Integer id;
+	private Long id;
 	@Column
 	private String nombre;
 	@Column
@@ -31,47 +34,4 @@ public class Producto {
 		this.stock = stock;
 	}
 
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getDescripcion() {
-		return descripcion;
-	}
-
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-
-	public Float getValor() {
-		return valor;
-	}
-
-	public void setValor(Float valor) {
-		this.valor = valor;
-	}
-
-	public Integer getStock() {
-		return stock;
-	}
-
-	public void setStock(Integer stock) {
-		this.stock = stock;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	@Override
-	public String toString() {
-		return "Producto [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", valor=" + valor
-				+ ", stock=" + stock + "]";
-	}
-	
-	
 }

@@ -6,11 +6,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import lombok.Data;
+
 @Entity
+@Data
 public class Carrito {
 	
 	@Id
-	private Integer id;
+	private Long id;
 	@Column
 	private List<Producto> compra;
 	@Column
@@ -26,32 +29,5 @@ public class Carrito {
 		this.compra = compra;
 		this.cliente = cliente;
 	}
-
-	public List<Producto> getCompra() {
-		return compra;
-	}
-
-	public void setCompra(List<Producto> compra) {
-		this.compra = compra;
-	}
-
-	public Cliente getCliente() {
-		return cliente;
-	}
-
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	@Override
-	public String toString() {
-		return "Carrito [id=" + id + ", compra=" + compra + ", cliente=" + cliente + "]";
-	}
-	
-	
 
 }

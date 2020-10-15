@@ -13,10 +13,10 @@ public interface ProductoRepository extends JpaRepository<Producto,Long>{
     public List<Producto> findAllByValor(Float valor);
 	
 
-    @Query("SELECT t FROM Producto t where t.name = :name")
+    @Query("SELECT t FROM Producto t where t.nombre = :name")
     public List<Producto> findAllByName(String name);
     
-    @Query("SELECT t FROM Producto t where t.stock = :stock")
+    @Query("SELECT t FROM Producto t where t.stock >= :stock")
     public List<Producto> findAllByStock(Integer stock);
     
 }

@@ -54,7 +54,7 @@ public class ProductoControllerJpa {
 		                    return repository.save(producto);
 		                })
 		                .orElseGet(() -> {
-		                    producto.setSaldo(newProducto.getValor());
+		                    newProducto.getValor();
 		                    return repository.save(newProducto);//ver bien este metodo
 		                });
 		    }

@@ -13,10 +13,8 @@ public interface ClienteRepository extends JpaRepository<Cliente,Long>{
     public List<Cliente> findAllBySaldoMayor(Float saldo);
 	
 
-    @Query("SELECT t FROM Cliente t where t.name = :name")
+    @Query("SELECT t FROM Cliente t where t.nombre = :name")
     public List<Cliente> findAllByName(String name);
 	
-    
-    
 
 }

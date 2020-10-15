@@ -14,4 +14,6 @@ public interface CarritoRepository extends JpaRepository<Carrito,Long>{
     public List<Producto> findAllByName(String name);
     
     
+    
+    
 }

@@ -41,20 +41,19 @@ public class ClienteControllerJpa {
     }
 	@GetMapping("/{id}")
 	Optional<Cliente> one(@PathVariable Long id) {
-
         return repository.findById(id);
     }
 	
 	@PutMapping("/{id}")
 	Cliente replaceCliente(@RequestBody Cliente newCliente, @PathVariable Long id) {
-		
 	        return repository.findById(id)
 	                .map(cliente -> {
 	                    cliente.setNombre(newCliente.getNombre());
+	                    cliente.setSaldo(newCliente.getSaldo());
 	                    return repository.save(cliente);
 	                })
 	                .orElseGet(() -> {
-	                    cliente.setSaldo(newCliente.getSaldo());
+	                    newCliente.setId(id);
 	                    return repository.save(newCliente);
 	                });
 	    }
