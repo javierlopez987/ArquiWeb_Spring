@@ -26,32 +26,5 @@ public class Cliente {
 		this.nombre = nombre;
 		this.saldo = saldo;
 	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public Float getSaldo() {
-		return saldo;
-	}
-
-	public void setSaldo(Float saldo) {
-		this.saldo = saldo;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	@Override
-	public String toString() {
-		return "Cliente [id=" + id + ", nombre=" + nombre + ", saldo=" + saldo + "]";
-	} 
-	
-
 	
 }
