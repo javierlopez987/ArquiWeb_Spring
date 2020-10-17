@@ -18,13 +18,13 @@ import almacen.repository.ClienteRepository;
 
 @RestController
 @RequestMapping("clientes")
-public class ClienteControllerJpa {
+public class ClienteController {
 
 	@Qualifier("clienteRepository")
 	@Autowired
 	private final ClienteRepository repository;
 
-	public ClienteControllerJpa(@Qualifier("clienteRepository") ClienteRepository repository) {
+	public ClienteController(@Qualifier("clienteRepository") ClienteRepository repository) {
 		this.repository = repository;
 	}
 

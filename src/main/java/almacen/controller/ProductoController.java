@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import almacen.model.Producto;
 import almacen.repository.ProductoRepository;
 
-public class ProductoControllerJpa {
+public class ProductoController {
 	
 	@Qualifier("productoRepository")
 	@Autowired
 	private final ProductoRepository repository;
 
-	public ProductoControllerJpa(@Qualifier("productoRepository") ProductoRepository repository) {
+	public ProductoController(@Qualifier("productoRepository") ProductoRepository repository) {
         this.repository = repository;
     }
 	
