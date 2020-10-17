@@ -12,5 +12,4 @@ public interface ClienteRepository extends JpaRepository<Cliente,Long>{
     @Query("SELECT c FROM Cliente c where c.nombre = :nombre")
     public List<Cliente> findAllByName(String nombre);
 	
-
 }

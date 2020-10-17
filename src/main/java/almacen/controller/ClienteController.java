@@ -32,20 +32,15 @@ public class ClienteController {
 	public Iterable<Cliente> getClientes() {
 		return repository.findAll();
 	}
-
-	@GetMapping("/ByName/{name}")
-	public Iterable<Cliente> getClientesByName(@PathVariable String name) {
-		return repository.findAllByName(name);
+	
+	@GetMapping("/{id}")
+	Optional<Cliente> one(@PathVariable Long id) {
+		return repository.findById(id);
 	}
 
 	@PostMapping("/")
 	public Cliente newCliente(@RequestBody Cliente c) {
 		return repository.save(c);
-	}
-
-	@GetMapping("/{id}")
-	Optional<Cliente> one(@PathVariable Long id) {
-		return repository.findById(id);
 	}
 
 	@PutMapping("/{id}")
@@ -63,4 +58,15 @@ public class ClienteController {
 	void deleteCliente(@PathVariable Long id) {
 		repository.deleteById(id);
 	}
+	
+	/*
+	 * SECCION DE SERVICIOS ADICIONALES
+	 */
+	@GetMapping("/nombre/{nombre}")
+	public Iterable<Cliente> getClientesByName(@PathVariable String nombre) {
+		return repository.findAllByName(nombre);
+	}
+	/*
+	 * FIN DE SECCION DE SERVICIOS ADICIONALES
+	 */
 }

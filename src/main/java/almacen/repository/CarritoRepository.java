@@ -14,5 +14,4 @@ public interface CarritoRepository extends JpaRepository<Carrito,Long>{
     @Query("SELECT c FROM Carrito c where c.cliente = :cliente")
     public List<Producto> findAllByCliente(Cliente cliente);
     
-    
 }

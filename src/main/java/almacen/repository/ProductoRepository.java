@@ -9,13 +9,38 @@ import almacen.model.Producto;
 
 public interface ProductoRepository extends JpaRepository<Producto,Long>{
 	
-	@Query("SELECT p FROM Producto p where p.costo >= :costo")
-    public List<Producto> findAllByCosto(float costo);
+	@Query("SELECT p FROM Producto p where p.nombre = :name")
+	public List<Producto> findAllByName(String name);
+	
+	/**
+     * Consideramos más útil esta consulta que la de buscar por costo igual a un valor
+	 * @param costo
+	 * @return Lista productos cuyo costo es mayor al valor pasado por parametro
+	 */
+	@Query("SELECT p FROM Producto p where p.costo > :costo")
+    public List<Producto> findAllGreaterThanCosto(float costo);
+	
+	/**
+     * Consideramos más útil esta consulta que la de buscar por costo igual a un valor
+	 * @param costo
+	 * @return Lista productos cuyo costo es menor o igual el valor pasado por parametro
+	 */
+	@Query("SELECT p FROM Producto p where p.costo <= :costo")
+    public List<Producto> findAllLessThanOrEqualCosto(float costo);
 
-    @Query("SELECT p FROM Producto p where p.nombre = :name")
-    public List<Producto> findAllByName(String name);
+    /**
+     * Consideramos más útil esta consulta que la de buscar por stock igual a un valor
+     * @param stock
+     * @return Lista productos cuyo stock es mayor al valor pasado por parametro
+     */
+    @Query("SELECT p FROM Producto p where p.stock > :stock")
+    public List<Producto> findAllGreaterThanStock(Integer stock);
     
-    @Query("SELECT p FROM Producto p where p.stock >= :stock")
-    public List<Producto> findAllByStock(Integer stock);
-    
+    /**
+     * Consideramos más útil esta consulta que la de buscar por stock igual a un valor
+     * @param stock
+     * @return Lista productos cuyo stock es menor o igual que el valor pasado por parametro
+     */
+    @Query("SELECT p FROM Producto p where p.stock <= :stock")
+    public List<Producto> findAllLessThanOrEqualStock(Integer stock);
 }
