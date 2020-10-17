@@ -1,8 +1,15 @@
 package almacen.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 
@@ -11,26 +18,26 @@ import lombok.Data;
 public class Producto {
 
 	@Id
+	@GeneratedValue
 	private Long id;
 	@Column
 	private String nombre;
 	@Column
-	private String descripcion;
-	@Column
-	private Float valor;
+	private float costo;
 	@Column
 	private Integer stock;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cliente")
+	@JsonIgnore
+	private List<Carrito> ventas;
 	
 	public Producto() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public Producto(String nombre, String descripcion, Float valor, Integer stock) {
+	public Producto(String nombre, float costo, Integer stock) {
 		super();
 		this.nombre = nombre;
-		this.descripcion = descripcion;
-		this.valor = valor;
+		this.costo = costo;
 		this.stock = stock;
 	}
 
