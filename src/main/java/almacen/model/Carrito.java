@@ -7,6 +7,8 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 
 import lombok.Data;
 
@@ -16,9 +18,11 @@ public class Carrito {
 	
 	@EmbeddedId
 	private Long id;
-	@Column
+	@ManyToOne
+	@MapsId("id")
 	private Producto producto;
-	@Column
+	@ManyToOne
+	@MapsId("id")
 	private Cliente cliente;
 	@Column
 	private Timestamp fecha;

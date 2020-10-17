@@ -9,14 +9,13 @@ import almacen.model.Producto;
 
 public interface ProductoRepository extends JpaRepository<Producto,Long>{
 	
-	@Query("SELECT t FROM Producto t where t.valor >= :valor")
-    public List<Producto> findAllByValor(Float valor);
-	
+	@Query("SELECT p FROM Producto p where p.costo >= :costo")
+    public List<Producto> findAllByCosto(float costo);
 
-    @Query("SELECT t FROM Producto t where t.nombre = :name")
+    @Query("SELECT p FROM Producto p where p.nombre = :name")
     public List<Producto> findAllByName(String name);
     
-    @Query("SELECT t FROM Producto t where t.stock >= :stock")
+    @Query("SELECT p FROM Producto p where p.stock >= :stock")
     public List<Producto> findAllByStock(Integer stock);
     
 }

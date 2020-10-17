@@ -9,12 +9,8 @@ import almacen.model.Cliente;
 
 public interface ClienteRepository extends JpaRepository<Cliente,Long>{
 	
-	@Query("SELECT t FROM Cliente t where t.saldo >= :saldo")
-    public List<Cliente> findAllBySaldoMayor(Float saldo);
-	
-
-    @Query("SELECT t FROM Cliente t where t.nombre = :name")
-    public List<Cliente> findAllByName(String name);
+    @Query("SELECT c FROM Cliente c where c.nombre = :nombre")
+    public List<Cliente> findAllByName(String nombre);
 	
 
 }

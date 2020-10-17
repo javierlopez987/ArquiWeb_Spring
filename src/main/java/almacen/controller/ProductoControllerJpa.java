@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import almacen.model.Cliente;
 import almacen.model.Producto;
 import almacen.repository.ProductoRepository;
 
@@ -34,9 +33,9 @@ public class ProductoControllerJpa {
         return repository.findAllByName(name);
 	} 
 	
-	 @GetMapping("/ByPrecio/{valor}")
-		public Iterable<Producto> getProdcutosByValor(@PathVariable Float valor) {
-	        return repository.findAllByValor(valor);
+	 @GetMapping("/ByCosto/{costo}")
+		public Iterable<Producto> getProductosByCosto(@PathVariable float costo) {
+	        return repository.findAllByCosto(costo);
 		} 
 	 
 	 @GetMapping("/{id}")
@@ -54,8 +53,8 @@ public class ProductoControllerJpa {
 		                    return repository.save(producto);
 		                })
 		                .orElseGet(() -> {
-		                    newProducto.getValor();
-		                    return repository.save(newProducto);//ver bien este metodo
+		                    newProducto.setId(id);;
+		                    return repository.save(newProducto);
 		                });
 		    }
 		

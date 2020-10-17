@@ -1,6 +1,5 @@
 package almacen.crud;
 
-
 import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
@@ -10,14 +9,11 @@ import almacen.model.Carrito;
 import almacen.model.Cliente;
 import almacen.model.Producto;
 
-
-
 @Repository
 public interface CarritoCrud extends CrudRepository<Carrito, Long> {
 
     List<Carrito> findByCliente(Cliente cliente);
     
-    List<Carrito> findByCosto(Float compra);
-    
     List<Carrito> findByProducto(Producto producto);
+    
 }
