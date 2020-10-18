@@ -3,30 +3,37 @@ package almacen.controller;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import almacen.dto.ItemCompraDTO;
 import almacen.model.Carrito;
 import almacen.repository.CarritoRepository;
+import almacen.repository.ClienteRepository;
+import almacen.repository.ProductoRepository;
 
 @RestController
 @RequestMapping("compras")
 public class CarritoController {
 
-	@Qualifier("carritoRepository")
 	@Autowired
 	private final CarritoRepository repository;
+	@Autowired
+	private final ClienteRepository clienteRepository;
+	@Autowired
+	private final ProductoRepository productoRepository;
 
-	public CarritoController(@Qualifier("carritoRepository") CarritoRepository repository) {
+	public CarritoController(CarritoRepository repository, ClienteRepository clienteRepository,
+			ProductoRepository productoRepository) {
+		super();
 		this.repository = repository;
+		this.clienteRepository = clienteRepository;
+		this.productoRepository = productoRepository;
 	}
 
 	@GetMapping("/")
@@ -40,8 +47,9 @@ public class CarritoController {
 	}
 
 	@PostMapping("/")
-	public void newCompra(@RequestBody Carrito c) {
-		repository.save(c);
+	public ItemCompraDTO newCompra(@RequestBody Carrito c) {
+		Carrito newCarrito = repository.save(c);
+		return new ItemCompraDTO(newCarrito);
 	}
 	
 	@DeleteMapping("/{id}")
