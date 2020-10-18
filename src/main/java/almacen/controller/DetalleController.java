@@ -57,15 +57,5 @@ public class DetalleController {
 		repository.deleteById(id);
 	}
 	
-	/*
-	 * SECCION DE SERVICIOS ADICIONALES
-	 */
-	@GetMapping("/nombre/{nombre}")
-	public Iterable<Cliente> getClientesByName(@PathVariable String nombre) {
-		return repository.findAllByName(nombre);
-	}
-	/*
-	 * FIN DE SECCION DE SERVICIOS ADICIONALES
-	 */
 
 }

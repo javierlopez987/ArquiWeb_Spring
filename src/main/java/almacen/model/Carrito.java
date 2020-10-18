@@ -1,14 +1,16 @@
 package almacen.model;
 
-import java.sql.Timestamp;
-import java.util.List;
+import java.sql.Date;
+import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
+import javax.persistence.OneToMany;
 
 import lombok.Data;
 
@@ -16,16 +18,15 @@ import lombok.Data;
 @Data
 public class Carrito {
 	
-	@EmbeddedId
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	@OneToMany
+	private Collection<Detalle> detalles;
 	@ManyToOne
-	@MapsId("id")
-	private Producto producto;
-	@ManyToOne
-	@MapsId("id")
 	private Cliente cliente;
 	@Column
-	private Timestamp fecha;
+	private Date fecha;
 	@Column
 	private Integer cantidad;
 	@Column
@@ -35,14 +36,12 @@ public class Carrito {
 		super();
 	}
 
-	public Carrito(Producto producto, Cliente cliente, Timestamp fecha, Integer cantidad, float precio) {
+	public Carrito(Collection<Detalle> detalles, Cliente cliente, String fecha, Integer cantidad, float precio) {
 		super();
-		this.producto = producto;
+		this.detalles = detalles;
 		this.cliente = cliente;
-		this.fecha = fecha;
+		this.fecha = Date.valueOf(fecha);
 		this.cantidad = cantidad;
 		this.precio = precio;
 	}
-
-	
 }

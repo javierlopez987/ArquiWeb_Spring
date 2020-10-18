@@ -1,12 +1,22 @@
 package almacen.utils;
 
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Collection;
+
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import almacen.model.Carrito;
 import almacen.model.Cliente;
+import almacen.model.Detalle;
 import almacen.model.Producto;
+import almacen.repository.CarritoRepository;
 import almacen.repository.ClienteRepository;
 import almacen.repository.ProductoRepository;
 
@@ -15,14 +25,76 @@ public class DemoDB {
 
 	@Bean
 	CommandLineRunner initDatabase(@Qualifier("clienteRepository") ClienteRepository clienteRepository,
-			@Qualifier("productoRepository") ProductoRepository productoRepository) {
+			@Qualifier("productoRepository") ProductoRepository productoRepository,
+			@Qualifier("carritoRepository") CarritoRepository carritoRepository) {
 		return args -> {
-			clienteRepository.save(new Cliente("Pedro"));
-			clienteRepository.save(new Cliente("Pablo"));
-			productoRepository.save(new Producto("Marmol", 15.50f, 100));
-			productoRepository.save(new Producto("Caliza", 10.50f, 200));
-			productoRepository.save(new Producto("Granito", 8.50f, 500));
-			productoRepository.save(new Producto("Cuarcita", 12.50f, 350));
+			cargarProductos(productoRepository);
+			cargarClientes(clienteRepository);
+			cargarCarritos(carritoRepository, productoRepository, clienteRepository);
 		};
+	}
+
+	private void cargarProductos(ProductoRepository productoRepository) {
+		String path = "csv/productos - export.csv";
+
+		CSVParser parser;
+		try {
+			parser = CSVFormat.DEFAULT.withHeader().parse(new FileReader(path));
+
+			for (CSVRecord row : parser) {
+				String nombre = row.get(0);
+				float costo = Float.valueOf(row.get(1));
+				Integer stock = Integer.valueOf(row.get(2));
+
+				Producto p = new Producto(nombre, costo, stock);
+				productoRepository.save(p);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void cargarClientes(ClienteRepository clienteRepository) {
+		String path = "csv/clientes - export.csv";
+
+		CSVParser parser;
+		try {
+			parser = CSVFormat.DEFAULT.withHeader().parse(new FileReader(path));
+
+			for (CSVRecord row : parser) {
+				String nombre = row.get(0);
+
+				Cliente p = new Cliente(nombre);
+				clienteRepository.save(p);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void cargarCarritos(CarritoRepository carritoRepository, 
+			ProductoRepository productoRepository, ClienteRepository clienteRepository) {
+		
+		String path = "csv/carritos - export.csv";
+
+		CSVParser parser;
+		try {
+			parser = CSVFormat.DEFAULT.withHeader().parse(new FileReader(path));
+
+			for (CSVRecord row : parser) {
+				Long id_producto = Long.valueOf(row.get(0));
+				Long id_cliente = Long.valueOf(row.get(1));
+				String fecha = row.get(2);
+				Integer cantidad = Integer.valueOf(row.get(3));
+				float precio = Float.valueOf(row.get(4));
+				Collection<Detalle> detalles = detalleRepository(id_detalle);//Como lo cargo?
+				Cliente cliente = clienteRepository.getOne(id_cliente);
+
+				Carrito c = new Carrito(producto, cliente, fecha, cantidad, precio);
+				carritoRepository.save(c);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

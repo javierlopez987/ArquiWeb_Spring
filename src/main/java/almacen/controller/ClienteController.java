@@ -34,7 +34,7 @@ public class ClienteController {
 	}
 	
 	@GetMapping("/{id}")
-	Optional<Cliente> one(@PathVariable Long id) {
+	public Optional<Cliente> one(@PathVariable Long id) {
 		return repository.findById(id);
 	}
 
