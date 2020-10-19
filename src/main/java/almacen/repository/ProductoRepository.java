@@ -2,12 +2,15 @@ package almacen.repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
+import almacen.dto.ProductoVendidoDTO;
 import almacen.model.Producto;
 
-public interface ProductoRepository extends JpaRepository<Producto,Long>{
+public interface ProductoRepository extends JpaRepository<Producto,Long> {
 	
 	@Query("SELECT p FROM Producto p where p.nombre = :name")
 	public List<Producto> findAllByName(String name);
@@ -43,4 +46,10 @@ public interface ProductoRepository extends JpaRepository<Producto,Long>{
      */
     @Query("SELECT p FROM Producto p where p.stock <= :stock")
     public List<Producto> findAllLessThanOrEqualStock(Integer stock);
+    
+	@Query("SELECT new almacen.dto.ProductoVendidoDTO(p.nombre, SUM(ca.cantidad) AS cantidad_vendida) "
+			+ "FROM Carrito AS ca JOIN ca.producto p "
+			+ "GROUP BY ca.producto "
+			+ "ORDER BY cantidad_vendida DESC ")
+	public List<ProductoVendidoDTO> selectProductoMasVendido(Pageable pageable);
 }
