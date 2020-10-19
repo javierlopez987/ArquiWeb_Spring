@@ -28,9 +28,13 @@ public class Producto {
 	private float costo;
 	@Column
 	private Integer stock;
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cliente")
+	/*
+	 * Atributo cuya función es permitir la navegación hacia Carrito y borrar en cascada
+	 * cuando se le pasa determinado producto. Utilizado en el endpoint productos/{id}
+	 */
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "producto")
 	@JsonIgnore
-	private List<Carrito> ventas;
+	List<Carrito> ventas;
 	
 	public Producto() {
 		super();

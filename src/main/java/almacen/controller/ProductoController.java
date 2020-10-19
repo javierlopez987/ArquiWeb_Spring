@@ -66,11 +66,6 @@ public class ProductoController {
 	 * SECCION DE SERVICIOS ADICIONALES 
 	 * que nos parecieron útiles para agregar
 	 */
-	@GetMapping("/nombre/{nombre}")
-	public Iterable<Producto> getProductosByName(@PathVariable String nombre) {
-		return repository.findAllByName(nombre);
-	}
-
 	@GetMapping("/costo/gt{costo}")
 	public Iterable<Producto> getProductosGreaterThanCosto(@PathVariable float costo) {
 		return repository.findAllGreaterThanCosto(costo);
