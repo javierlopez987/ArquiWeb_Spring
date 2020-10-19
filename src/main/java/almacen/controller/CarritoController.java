@@ -48,6 +48,8 @@ public class CarritoController {
 
 	@PostMapping("/")
 	public ItemCompraDTO newCompra(@RequestBody Carrito c) {
+		ItemCompraDTO ctrlItem = new ItemCompraDTO(c);
+		//TODO ctrlItem para control cupo diario por producto
 		Carrito newCarrito = repository.save(c);
 		return new ItemCompraDTO(newCarrito);
 	}
