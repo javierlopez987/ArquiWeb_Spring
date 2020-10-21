@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 container.innerHTML = "";
                 for (let elemento of dato) {
                     container.innerHTML += "<tr>"+
-                   "<td>"+ elemento.cliente+"</td>";
+                   "<td>"+ elemento.cliente+"</td>"+
                    "<td>"+ elemento.monto_total_compras+"</td></tr>";
                 }
             } else {
@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let request = URL + "ventas";
         let encabezado = document.querySelector("#encabezadoRepo");
         encabezado.innerHTML = "";
-        encabezado.innerHTML += "<th>Fecha</th>"+"<th>Cantidad productos vendidos</th>"+"<th>Monto total ventas</th>";
+        encabezado.innerHTML += "<th scope="+"col"+">Fecha</th>"+"<th scope="+"col"+">Cantidad productos vendidos</th>"+"<th scope="+"col"+">Monto total ventas</th>";
         let container = document.querySelector("#tableReport");
         container.innerHTML = "<li>Cargando...</li>";
         try {
@@ -59,11 +59,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 let dato = await response.json();
                 container.innerHTML = "";
                 for (let elemento of dato) {
-                    container.innerHTML += "<tr><td>"+
-                    elemento.id+"</td>"+
-                    "<td>"+ elemento.fecha+"</td>";
-                   "<td>"+ elemento.catidad_productos_vendidos+"</td>";
-                   "<td>"+ elemento.monto_total_ventas+"</td>";
+                    container.innerHTML += 
+                    "<tr><td>"+ elemento.fecha+"</td>"+
+                   "<td>"+ elemento.cantidad_productos_vendidos+"</td>"+
+                   "<td>"+ elemento.monto_total_ventas+"</td></tr>";
                 }
             } else {
                 container.innerHTML = "";
@@ -85,7 +84,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let request = URL + "productos";
         let encabezado = document.querySelector("#encabezadoRepo");
         encabezado.innerHTML = "";
-        encabezado.innerHTML += "<th>id</th>"+"<th>Nombre</th>"+"<th>Cantidad vendida</th>";
+        encabezado.innerHTML += "<th scope="+"col"+">Nombre</th>"+"<th scope="+"col"+">Cantidad vendida</th>";
         let container = document.querySelector("#tableReport");
         container.innerHTML = "<li>Cargando...</li>";
         try {
@@ -94,11 +93,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 let dato = await response.json();
                 container.innerHTML = "";
                 for (let elemento of dato) {
-                    container.innerHTML += "<tr><td>"+
-                    elemento.id+"</td>"+
-                    "<td>"+ elemento.producto.id+"</td>";
-                   "<td>"+ elemento.producto.nombre+"</td>";
-                   "<td>"+ elemento.cantidad_vendida+"</td>";
+                    container.innerHTML += "<tr><td>"+ 
+                    elemento.producto+"</td>"+
+                   "<td>"+ elemento.cantidad_vendida+"</td></tr>";
                 }
             } else {
                 container.innerHTML = "";

@@ -50,6 +50,7 @@ public class CarritoController {
 		return repository.findById(id);
 	}
 
+	// metodo que me permite realizar compra mediante los datos cliente(id), fecha y cantidad de un producto
 	@PostMapping("/")
 	public ItemCompraDTO newCompra(@RequestBody Carrito c) {
 		ItemCompraDTO ctrlItem = new ItemCompraDTO(c);
@@ -62,10 +63,11 @@ public class CarritoController {
 		}
 		if (cantProd < 4) {
 		//TODO ctrlItem para control cupo diario por producto
+		c.setPrecio(prod.get(0).getCosto()*c.getCantidad());// calcula el precio de la compra
 		Carrito newCarrito = repository.save(c);
 		return new ItemCompraDTO(newCarrito);
 		}
-		return null;
+	return null;
 }
 	
 	@DeleteMapping("/{id}")
