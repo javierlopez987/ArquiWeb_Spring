@@ -22,7 +22,7 @@ import almacen.repository.ClienteRepository;
 import almacen.repository.ProductoRepository;
 
 @RestController
-@RequestMapping("carritos")
+@RequestMapping("compras")
 public class CarritoController {
 
 	@Autowired
